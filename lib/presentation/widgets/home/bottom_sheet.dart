@@ -47,10 +47,13 @@ class BottomSheetImageWidget extends StatelessWidget {
                         2,
                         (index) => Expanded(
                           child: ImgWidget(
-                            imgPath: index.isEven ? ImagesPaths.furniture1 : ImagesPaths.furniture2,
+                            imgPath: index.isEven
+                                ? ImagesPaths.furniture1
+                                : ImagesPaths.furniture2,
                             imgHeight: context.sizeHeight(0.4),
                             milliseconds: 3650,
-                            text: index == 0 ? 'Margaret., 32' : 'Trefeleva., 43',
+                            text:
+                                index == 0 ? 'Margaret., 32' : 'Trefeleva., 43',
                             sliderWidth: 0.36,
                           ),
                         ),

@@ -78,7 +78,8 @@ class _HomeViewState extends State<HomeView> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: context.colorScheme.secondary.withOpacity(0.1),
+                                  color: context.colorScheme.secondary
+                                      .withOpacity(0.1),
                                   blurRadius: 10,
                                   offset: const Offset(0, 5),
                                 ),
@@ -90,14 +91,14 @@ class _HomeViewState extends State<HomeView> {
                                 ImagesPaths.mapPoint,
                                 color: context.colorScheme.secondary,
                                 height: 20,
-                              ).animate().fadeInFromLeft(delay: 450.ms, animationDuration: 500.ms),
+                              ).animate().fadeInFromLeft(
+                                  delay: 450.ms, animationDuration: 500.ms),
                               Flexible(
                                 child: const AutoSizeText(
                                   'Saint Petersburg',
                                   maxLines: 1,
-                                )
-                                    .animate()
-                                    .fadeInFromLeft(delay: 600.ms, animationDuration: 800.ms),
+                                ).animate().fadeInFromLeft(
+                                    delay: 600.ms, animationDuration: 800.ms),
                               )
                             ].rowInPadding(5),
                           ),
@@ -126,12 +127,14 @@ class _HomeViewState extends State<HomeView> {
                           'let\'s select your',
                           style: context.textTheme.titleLarge,
                           textScaleFactor: 1.2,
-                        ).fadeInFromBottom(delay: 1800.ms, animationDuration: 450.ms),
+                        ).fadeInFromBottom(
+                            delay: 1800.ms, animationDuration: 450.ms),
                         Text(
                           'perfect place',
                           style: context.textTheme.titleLarge,
                           textScaleFactor: 1.2,
-                        ).fadeInFromBottom(delay: 2100.ms, animationDuration: 500.ms),
+                        ).fadeInFromBottom(
+                            delay: 2100.ms, animationDuration: 500.ms),
                       ],
                     )
                   ],

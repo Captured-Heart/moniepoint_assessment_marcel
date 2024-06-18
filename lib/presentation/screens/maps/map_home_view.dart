@@ -15,8 +15,10 @@ class MapHomeView extends StatefulWidget {
   State<MapHomeView> createState() => MapSampleState();
 }
 
-class MapSampleState extends State<MapHomeView> with SingleTickerProviderStateMixin {
-  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+class MapSampleState extends State<MapHomeView>
+    with SingleTickerProviderStateMixin {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
   late AnimationController _animationController;
   bool isExpanded = true;
 
@@ -29,8 +31,8 @@ class MapSampleState extends State<MapHomeView> with SingleTickerProviderStateMi
 
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: 700.ms, reverseDuration: 500.ms);
+    _animationController = AnimationController(
+        vsync: this, duration: 700.ms, reverseDuration: 500.ms);
     _animationController.addStatusListener((listener) {
       if (listener == AnimationStatus.dismissed) {
         isExpanded = false;

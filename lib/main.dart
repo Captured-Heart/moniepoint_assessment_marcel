@@ -41,7 +41,8 @@ class BottomNavBarWrapper extends StatefulWidget {
   State<BottomNavBarWrapper> createState() => _BottomNavBarWrapperState();
 }
 
-class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> with RippleEffectMixin {
+class _BottomNavBarWrapperState extends State<BottomNavBarWrapper>
+    with RippleEffectMixin {
   int pageIndex = 2;
   int numValue1 = 0;
   int numValue2 = 0;
@@ -94,13 +95,16 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> with RippleEf
             //map screen
             MapHomeView(darkMapStyle: _darkMapStyle),
             //chat screen
-            PagesPlaceholderWidget(navbarIcons: navbarIcons, pageIndex: pageIndex),
+            PagesPlaceholderWidget(
+                navbarIcons: navbarIcons, pageIndex: pageIndex),
             // home screen
             const HomeView(),
             //heart screen
-            PagesPlaceholderWidget(navbarIcons: navbarIcons, pageIndex: pageIndex),
+            PagesPlaceholderWidget(
+                navbarIcons: navbarIcons, pageIndex: pageIndex),
             // profile screen
-            PagesPlaceholderWidget(navbarIcons: navbarIcons, pageIndex: pageIndex),
+            PagesPlaceholderWidget(
+                navbarIcons: navbarIcons, pageIndex: pageIndex),
           ][pageIndex],
           // MapHomeView(),
           Align(
@@ -141,7 +145,9 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> with RippleEf
                                     : context.colorScheme.onSurface,
                                 shape: BoxShape.circle,
                                 border: onHideBorder && pageIndex == index
-                                    ? Border.all(color: context.colorScheme.surface, width: 1)
+                                    ? Border.all(
+                                        color: context.colorScheme.surface,
+                                        width: 1)
                                     : null,
                               ),
                             )
@@ -152,7 +158,8 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> with RippleEf
                 ),
               ),
             ).padOnly(bottom: context.sizeHeight(0.015)),
-          ).slideInFromBottom(delay: 3000.ms, animationDuration: 2500.ms, begin: 0.9),
+          ).slideInFromBottom(
+              delay: 3000.ms, animationDuration: 2500.ms, begin: 0.9),
         ],
       ),
     );

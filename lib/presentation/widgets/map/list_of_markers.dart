@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -44,7 +43,8 @@ class _ListOfMarkersWidgetState extends State<ListOfMarkersWidget>
         ...List.generate(
           6,
           (index) => Positioned(
-            top: context.sizeHeight([0.23, 0.295, 0.5, 0.32, 0.45, 0.55][index]),
+            top:
+                context.sizeHeight([0.23, 0.295, 0.5, 0.32, 0.45, 0.55][index]),
             left: context.sizeWidth([0.3, 0.35, 0.2, 0.7, 0.7, 0.6][index]),
             child: AnimatedBuilder(
               animation: _animation,
@@ -57,8 +57,8 @@ class _ListOfMarkersWidgetState extends State<ListOfMarkersWidget>
                     child: AnimatedContainer(
                       duration: 800.ms,
                       width: !overlayExpanded ? 35 : 75,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: !overlayExpanded ? 8 : 12, vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: !overlayExpanded ? 8 : 12, vertical: 12),
                       decoration: BoxDecoration(
                           color: context.colorScheme.primary,
                           borderRadius: const BorderRadius.only(

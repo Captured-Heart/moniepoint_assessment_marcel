@@ -63,7 +63,9 @@ class ImgWidgetState extends State<ImgWidget> {
           bottom: 10,
           left: context.sizeWidth(0.05),
           child: AnimatedContainer(
-            width: _isTransformed ? context.sizeWidth(widget.sliderWidth ?? 0.8) : 45,
+            width: _isTransformed
+                ? context.sizeWidth(widget.sliderWidth ?? 0.8)
+                : 45,
             height: 42,
             onEnd: () {
               setState(() {
@@ -92,7 +94,8 @@ class ImgWidgetState extends State<ImgWidget> {
                           minFontSize: 10,
                           maxLines: 1,
                           textAlign: TextAlign.center,
-                        ).fadeInFromLeft(delay: 100.ms, animationDuration: 100.ms),
+                        ).fadeInFromLeft(
+                          delay: 100.ms, animationDuration: 100.ms),
                 ),
                 Positioned(
                   right: 0,

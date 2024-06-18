@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 
 ////////////////////////////
 
-mixin RippleEffectMixin<T extends StatefulWidget> on State<T> implements TickerProvider {
+mixin RippleEffectMixin<T extends StatefulWidget> on State<T>
+    implements TickerProvider {
   late AnimationController _controller;
   late Animation<double> _rippleAnimation;
   bool _onHideBorder = false;

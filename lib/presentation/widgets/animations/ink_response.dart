@@ -40,8 +40,8 @@ InkResponse inkResponseWidget(
                         ? const SizedBox.shrink()
                         : Center(
                             child: CustomPaint(
-                              painter:
-                                  RipplePainter(rippleAnimation.value, strokeWidth: strokeWidth),
+                              painter: RipplePainter(rippleAnimation.value,
+                                  strokeWidth: strokeWidth),
                             ),
                           );
                   },
