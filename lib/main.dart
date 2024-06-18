@@ -1,7 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: implementation_imports
@@ -13,10 +11,7 @@ import 'package:svg_flutter/svg.dart';
 import 'app.dart';
 
 void main() {
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const MainApp(),
-  ));
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -26,8 +21,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       theme: AppThemeData.lightTheme,
       home: const BottomNavBarWrapper(),
     );
@@ -41,8 +34,7 @@ class BottomNavBarWrapper extends StatefulWidget {
   State<BottomNavBarWrapper> createState() => _BottomNavBarWrapperState();
 }
 
-class _BottomNavBarWrapperState extends State<BottomNavBarWrapper>
-    with RippleEffectMixin {
+class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> with RippleEffectMixin {
   int pageIndex = 2;
   int numValue1 = 0;
   int numValue2 = 0;
@@ -95,16 +87,13 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper>
             //map screen
             MapHomeView(darkMapStyle: _darkMapStyle),
             //chat screen
-            PagesPlaceholderWidget(
-                navbarIcons: navbarIcons, pageIndex: pageIndex),
+            PagesPlaceholderWidget(navbarIcons: navbarIcons, pageIndex: pageIndex),
             // home screen
             const HomeView(),
             //heart screen
-            PagesPlaceholderWidget(
-                navbarIcons: navbarIcons, pageIndex: pageIndex),
+            PagesPlaceholderWidget(navbarIcons: navbarIcons, pageIndex: pageIndex),
             // profile screen
-            PagesPlaceholderWidget(
-                navbarIcons: navbarIcons, pageIndex: pageIndex),
+            PagesPlaceholderWidget(navbarIcons: navbarIcons, pageIndex: pageIndex),
           ][pageIndex],
           // MapHomeView(),
           Align(
@@ -145,9 +134,7 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper>
                                     : context.colorScheme.onSurface,
                                 shape: BoxShape.circle,
                                 border: onHideBorder && pageIndex == index
-                                    ? Border.all(
-                                        color: context.colorScheme.surface,
-                                        width: 1)
+                                    ? Border.all(color: context.colorScheme.surface, width: 1)
                                     : null,
                               ),
                             )
@@ -158,8 +145,7 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper>
                 ),
               ),
             ).padOnly(bottom: context.sizeHeight(0.015)),
-          ).slideInFromBottom(
-              delay: 3000.ms, animationDuration: 2500.ms, begin: 0.9),
+          ).slideInFromBottom(delay: 3000.ms, animationDuration: 2500.ms, begin: 0.9),
         ],
       ),
     );
