@@ -15,6 +15,7 @@ class AppThemeData {
       secondary: AppColors.secondary,
       secondaryContainer: AppColors.secondaryContainer,
       onSecondary: AppColors.black,
+      tertiary: AppColors.tertiary,
       error: AppColors.error,
       onError: AppColors.white,
       surface: AppColors.white,
