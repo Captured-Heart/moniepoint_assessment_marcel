@@ -15,7 +15,11 @@
 ## AN INTRO VIDEO OF THE APP
 
 
-Uploading Screen Recording 2024-06-18 at 7.13.14 PM.mov…
+
+https://github.com/Captured-Heart/moniepoint_assessment_marcel/assets/69226443/d33b1af3-3300-4695-bb76-5b8aa1fd36f8
+
+
+
 
 
 </div>
