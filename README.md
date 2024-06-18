@@ -3,18 +3,20 @@
 
 ## Moniepoint Assessment
 
-<strong> A take home assessment from the TeamApt inc. </strong>
+<strong> A take-home assessment from the TeamApt Inc. </strong>
 
 <br/>
-<a href='https://dribbble.com/shots/23780608-Real-Estate-App'><img alt='Dribble link' height='36px'/></a>
-<a href='https://drive.google.com/drive/folders/19rPMzMpCHUe5Tllrf6ZFekBKlLw468Sh?usp=drive_link'><img alt='Get APK here' height='36px'/></a>
+[Dribbble link](https://dribbble.com/shots/23780608-Real-Estate-App)
+[Get APK here](https://drive.google.com/drive/folders/19rPMzMpCHUe5Tllrf6ZFekBKlLw468Sh?usp=drive_link)
 
 <sub>Built by <a href="https://twitter.com/_Captured_Heart">Nkpozi Marcel Kelechi</a></sub>
 <br />
 
 ## AN INTRO VIDEO OF THE APP
 
-https://github.com/Captured-Heart/connect_me/assets/69226443/63c2abe0-4c5f-4151-9f9a-77beb289a4b7
+
+Uploading Screen Recording 2024-06-18 at 7.13.14 PM.mov…
+
 
 </div>
 
@@ -34,7 +36,7 @@ Install `fvm` if not already installed.
 dart pub global activate fvm
 ```
 
-Install local `flutter` version.
+Install the local `flutter` version.
 
 ```bash
 fvm install
@@ -47,11 +49,11 @@ fvm install
 1. Google Maps:
 
    - Arranging markers on the map to show the location of the user.
-   - Added a dark mode skin to the google map
+   - Added a dark mode skin to the Google map
 
 2. Flutter Animations:
 
-   - Animated widgets according to the design on dribble. [Dribble link](https://dribbble.com/shots/23780608-Real-Estate-App)   
+   - Animated widgets according to the design on Dribbble. [Dribble link](https://dribbble.com/shots/23780608-Real-Estate-App)   
 
 ## UI Shots
 
