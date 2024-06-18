@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:moniepoint_assessment_marcel/presentation/widgets/overlay_dialog.dart';
 
 import '../../../app.dart';
 
@@ -34,7 +32,6 @@ class MapSampleState extends State<MapHomeView> with SingleTickerProviderStateMi
     _animationController =
         AnimationController(vsync: this, duration: 700.ms, reverseDuration: 500.ms);
     _animationController.addStatusListener((listener) {
-      log('this is the listener: $listener');
       if (listener == AnimationStatus.dismissed) {
         isExpanded = false;
         setState(() {});
