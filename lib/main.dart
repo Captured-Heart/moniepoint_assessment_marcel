@@ -2,7 +2,10 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:moniepoint_assessment_marcel/presentation/widgets/ripple_btn_animation.dart';
+import 'package:moniepoint_assessment_marcel/presentation/widgets/ripple_trial.dart';
 import 'package:svg_flutter/svg.dart';
 
 import 'app.dart';
@@ -36,7 +39,7 @@ class BottomNavBarWrapper extends StatefulWidget {
   State<BottomNavBarWrapper> createState() => _BottomNavBarWrapperState();
 }
 
-class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
+class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> with RippleEffectMixin {
   int pageIndex = 2;
   int numValue1 = 0;
   int numValue2 = 0;
@@ -104,28 +107,7 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ...List.generate(
-                      5,
-                      (index) => CircleAvatar(
-                        radius: pageIndex == index ? 27 : 24,
-                        backgroundColor: pageIndex == index
-                            ? context.colorScheme.primary
-                            :
-                            //  Colors.black.withOpacity(0.2), // for map_view
-                            context.colorScheme.onSurface,
-                        child: SvgPicture.asset(
-                          navbarIcons.values.toList()[index],
-                          color: context.colorScheme.surface,
-                          height: pageIndex == index ? 28 : null,
-                        ),
-                      ).onTapWidget(
-                          tooltip: navbarIcons.keys.toList()[index],
-                          onTap: () {
-                            setState(() {
-                              pageIndex = index;
-                            });
-                          }),
-                    ),
+                    ...List.generate(5, (index) => rippleAnimationWidget(index, context)),
                   ],
                 ),
               ),
@@ -135,4 +117,84 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
       ),
     );
   }
+
+  InkResponse rippleAnimationWidget(int index, BuildContext context) {
+    return InkResponse(
+      onTap: () {
+        onTap();
+        setState(() {
+          pageIndex = index;
+        });
+      },
+      containedInkWell: true,
+      highlightShape: BoxShape.circle,
+      splashColor: Colors.transparent,
+      child: AnimatedContainer(
+        duration: 500.ms,
+        padding: const EdgeInsets.all(12),
+        curve: Curves.easeInOut,
+        width: pageIndex == index ? 55 : 47,
+        height: pageIndex == index ? 55 : 47,
+        decoration: BoxDecoration(
+          color: pageIndex == index && !onHideBorder
+              ? context.colorScheme.primary
+              : context.colorScheme.onSurface,
+          shape: BoxShape.circle,
+          border: onHideBorder && pageIndex == index
+              ? Border.all(color: context.colorScheme.surface, width: 1)
+              : null,
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            pageIndex == index
+                ? AnimatedBuilder(
+                    animation: rippleAnimation,
+                    builder: (context, child) {
+                      return !onHideBorder
+                          ? const SizedBox.shrink()
+                          : Center(
+                              child: CustomPaint(
+                                painter: RipplePainter(rippleAnimation.value),
+                              ),
+                            );
+                    },
+                  )
+                : const SizedBox.shrink(),
+            SvgPicture.asset(
+              navbarIcons.values.toList()[index],
+              color: context.colorScheme.surface,
+              height: pageIndex == index ? 28 : null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Ticker createTicker(TickerCallback onTick) {
+    return Ticker(onTick, debugLabel: 'created by $this');
+  }
 }
+
+
+  // CircleAvatar(
+                        //   radius: pageIndex == index ? 27 : 24,
+                        //   backgroundColor: pageIndex == index
+                        //       ? context.colorScheme.primary
+                        //       :
+                        //       //  Colors.black.withOpacity(0.2), // for map_view
+                        //       context.colorScheme.onSurface,
+                        //   child: SvgPicture.asset(
+                        //     navbarIcons.values.toList()[index],
+                        //     color: context.colorScheme.surface,
+                        //     height: pageIndex == index ? 28 : null,
+                        //   ),
+                        // ).onTapWidget(
+                        //     tooltip: navbarIcons.keys.toList()[index],
+                        //     onTap: () {
+                        //       setState(() {
+                        //         pageIndex = index;
+                        //       });
+                        //     }),
