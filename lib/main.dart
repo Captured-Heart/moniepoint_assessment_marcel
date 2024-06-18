@@ -1,8 +1,8 @@
-import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:moniepoint_assessment_marcel/presentation/widgets/slider_button.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:svg_flutter/svg.dart';
 
 import 'app.dart';
@@ -24,9 +24,7 @@ class MainApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       theme: AppThemeData.lightTheme,
-      home: MapHomeView(),
-
-      // BottomNavBarWrapper(),
+      home: BottomNavBarWrapper(),
     );
   }
 }
@@ -39,11 +37,15 @@ class BottomNavBarWrapper extends StatefulWidget {
 }
 
 class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
-  int pageIndex = 2;
+  int pageIndex = 0;
   int numValue1 = 0;
   int numValue2 = 0;
+  String? _darkMapStyle;
+
   @override
   void initState() {
+    _loadMapStyles();
+
     Future.delayed(const Duration(milliseconds: 800), () {
       setState(() {
         numValue1 = 1034;
@@ -51,6 +53,10 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
       });
     });
     super.initState();
+  }
+
+  Future _loadMapStyles() async {
+    _darkMapStyle = await rootBundle.loadString(ImagesPaths.darkModeMap);
   }
 
   Map<String, String> navbarIcons = {
@@ -66,6 +72,7 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
       body: Stack(
         fit: StackFit.expand,
         children: [
+          // the background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -75,105 +82,17 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
               ),
             ),
           ),
-          SafeArea(
-            bottom: false,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // saint petersburg row
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.surface,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(
-                                    ImagesPaths.mapPoint,
-                                    color: context.colorScheme.secondary,
-                                    height: 20,
-                                  ),
-                                  const Text('Saint Petersburg')
-                                ].rowInPadding(5),
-                              ),
-                            ),
-                          ),
-                          const CircleAvatar(
-                            radius: 22,
-                            backgroundImage: AssetImage(ImagesPaths.face),
-                          ),
-                        ],
-                      ),
 
-                      // hi marina
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            'Hi, Marina',
-                            style: context.textTheme.bodyLarge,
-                          ),
-                          Text(
-                            'let\'s select your\nperfect place',
-                            style: context.textTheme.titleLarge,
-                            textScaleFactor: 1.2,
-                          )
-                        ],
-                      ),
-
-                      // BUY AND RENT ROW WIDGETS
-                      SizedBox(
-                        height: context.sizeHeight(0.185),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color: context.colorScheme.primary,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: textAndNumbersColumn(
-                                  context,
-                                  title: 'BUY',
-                                  isCircle: true,
-                                  numValue: numValue1,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color: context.colorScheme.surface,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: textAndNumbersColumn(
-                                  context,
-                                  title: 'RENT',
-                                  numValue: numValue2,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ].columnInPadding(20),
-                  ).padSymmetric(horizontal: 15, vertical: 10),
-                  BottomSheetImageWidget(),
-                ],
-              ),
+          [
+            MapHomeView(
+              darkMapStyle: _darkMapStyle,
             ),
-          ),
+            Placeholder(),
+            HomeView(),
+            Placeholder(),
+            Placeholder()
+          ][pageIndex],
+          // MapHomeView(),
           Align(
             alignment: Alignment.bottomCenter,
             child: SizedBox(
@@ -191,7 +110,9 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
                         radius: pageIndex == index ? 27 : 24,
                         backgroundColor: pageIndex == index
                             ? context.colorScheme.primary
-                            : context.colorScheme.onSurface,
+                            :
+                            //  Colors.black.withOpacity(0.2), // for map_view
+                            context.colorScheme.onSurface,
                         child: SvgPicture.asset(
                           navbarIcons.values.toList()[index],
                           color: context.colorScheme.surface,
@@ -209,140 +130,9 @@ class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
                 ),
               ),
             ).padOnly(bottom: context.sizeHeight(0.015)),
-          ),
+          ).slideInFromBottom(delay: 3600.ms, animationDuration: 3000.ms, begin: 0.9),
         ],
       ),
-    );
-  }
-
-  Column textAndNumbersColumn(
-    BuildContext context, {
-    required String title,
-    bool isCircle = false,
-    int numValue = 0,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          title,
-          style: context.textTheme.bodySmall?.copyWith(
-            color: isCircle == true ? context.colorScheme.surface : null,
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          heightFactor: 1.35,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedFlipCounter(
-                duration: const Duration(milliseconds: 1500),
-                value: numValue,
-                wholeDigits: 4,
-                hideLeadingZeroes: true,
-                thousandSeparator: ' ',
-                textStyle: context.textTheme.labelLarge?.copyWith(
-                  color: isCircle == true ? context.colorScheme.surface : null,
-                ),
-              ),
-              Text(
-                'offers',
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: isCircle == true ? context.colorScheme.surface : null,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BottomSheetImageWidget extends StatelessWidget {
-  const BottomSheetImageWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: context.sizeWidth(1),
-      padding: const EdgeInsets.all(6),
-      alignment: Alignment.bottomCenter,
-      decoration: BoxDecoration(
-        color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(15),
-          topRight: Radius.circular(15),
-        ),
-      ),
-      child: Column(
-        children: [
-          imgWidget(context),
-          SizedBox(
-            height: context.sizeHeight(0.45),
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: imgWidget(
-                      context,
-                      imgPath: ImagesPaths.furniture4,
-                      imgHeight: context.sizeHeight(0.5),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(
-                        2,
-                        (index) => Expanded(
-                          child: imgWidget(
-                            context,
-                            imgPath: index.isEven ? ImagesPaths.furniture1 : ImagesPaths.furniture2,
-                            imgHeight: context.sizeHeight(0.4),
-                          ),
-                        ),
-                      ).columnInPadding(5),
-                    ),
-                  )
-                ].rowInPadding(5)),
-          ).padSymmetric(vertical: 5),
-        ],
-      ),
-    );
-  }
-
-  Widget imgWidget(
-    BuildContext context, {
-    double? imgHeight,
-    String? imgPath,
-  }) {
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: Image.asset(
-            imgPath ?? ImagesPaths.furniture2,
-            height: imgHeight ?? context.sizeHeight(0.2),
-            width: context.sizeWidth(1),
-            fit: BoxFit.cover,
-          ),
-        ),
-        Positioned(
-          bottom: 10,
-          left: context.sizeWidth(0.05),
-          right: context.sizeWidth(0.05),
-          child: SliderButton(
-            milliseconds: 2000,
-            text: 'Slide to view',
-          ),
-        )
-      ],
     );
   }
 }
