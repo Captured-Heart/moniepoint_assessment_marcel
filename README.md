@@ -6,7 +6,7 @@
 <strong> A take-home assessment from the TeamApt Inc. </strong>
 
 <br/>
-[Dribbble link](https://dribbble.com/shots/23780608-Real-Estate-App)
+[Dribbble link](https://dribbble.com/shots/23780608-Real-Estate-App) <br/>
 [Get APK here](https://drive.google.com/drive/folders/19rPMzMpCHUe5Tllrf6ZFekBKlLw468Sh?usp=drive_link)
 
 <sub>Built by <a href="https://twitter.com/_Captured_Heart">Nkpozi Marcel Kelechi</a></sub>
