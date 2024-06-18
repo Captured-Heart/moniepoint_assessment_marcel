@@ -136,60 +136,58 @@ class _HomeViewState extends State<HomeView> {
                     )
                   ],
                 ),
-
-                // BUY AND RENT ROW WIDGETS
-                Stack(
-                  children: [
-                    SizedBox(
-                      height: context.sizeHeight(0.18),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.primary,
-                                shape: BoxShape.circle,
-                              ),
-                              child: textAndNumbersColumn(
-                                context,
-                                title: 'BUY',
-                                isCircle: true,
-                                numValue: numValue1,
-                              ),
-                            ).scale(delay: 1800.ms, animationDuration: 1000.ms),
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.surface,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: textAndNumbersColumn(
-                                context,
-                                title: 'RENT',
-                                numValue: numValue2,
-                              ),
-                            ).scale(delay: 1800.ms, animationDuration: 1000.ms),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    //
-                    Offstage(
-                      offstage: !hideCircleRow,
-                      child: const BottomSheetImageWidget().slideInFromBottom(
-                        delay: 2700.ms,
-                        animationDuration: 1200.ms,
-                        begin: 1,
-                      ),
-                    ),
-                  ],
-                ),
               ].columnInPadding(hideCircleRow ? 10 : 20),
             ).padSymmetric(horizontal: 15, vertical: 10),
+            // BUY AND RENT ROW WIDGETS
+            Stack(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.primary,
+                          shape: BoxShape.circle,
+                        ),
+                        child: textAndNumbersColumn(
+                          context,
+                          title: 'BUY',
+                          isCircle: true,
+                          numValue: numValue1,
+                        ),
+                      ).scale(delay: 1800.ms, animationDuration: 1000.ms),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        margin: const EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.surface,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: textAndNumbersColumn(
+                          context,
+                          title: 'RENT',
+                          numValue: numValue2,
+                        ),
+                      ).scale(delay: 1800.ms, animationDuration: 1000.ms),
+                    )
+                  ],
+                ),
+
+                //
+                Offstage(
+                  offstage: !hideCircleRow,
+                  child: const BottomSheetImageWidget().slideInFromBottom(
+                    delay: 2700.ms,
+                    animationDuration: 1200.ms,
+                    begin: 1,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

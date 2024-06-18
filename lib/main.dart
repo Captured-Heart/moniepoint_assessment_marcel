@@ -37,7 +37,7 @@ class BottomNavBarWrapper extends StatefulWidget {
 }
 
 class _BottomNavBarWrapperState extends State<BottomNavBarWrapper> {
-  int pageIndex = 0;
+  int pageIndex = 2;
   int numValue1 = 0;
   int numValue2 = 0;
   String? _darkMapStyle;
