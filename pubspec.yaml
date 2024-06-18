@@ -9,7 +9,6 @@ environment:
 dependencies:
   animated_flip_counter: ^0.3.4
   auto_size_text: ^3.0.0
-  device_preview: ^1.2.0
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
