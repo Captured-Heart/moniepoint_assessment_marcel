@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:moniepoint_assessment_marcel/app.dart';
-import 'package:moniepoint_assessment_marcel/presentation/widgets/animations/ink_response.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class OverlayDialog extends StatefulWidget {
@@ -17,10 +16,8 @@ class OverlayDialog extends StatefulWidget {
 }
 
 class _OverlayDialogState extends State<OverlayDialog> with RippleEffectMixin {
-  final OverlayPortalController _overlayPortalController =
-      OverlayPortalController();
-  final OverlayPortalController _overlayPortalController2 =
-      OverlayPortalController();
+  final OverlayPortalController _overlayPortalController = OverlayPortalController();
+  final OverlayPortalController _overlayPortalController2 = OverlayPortalController();
   int iconIndex = 0;
   late Animation<double> _animation;
 
@@ -46,10 +43,7 @@ class _OverlayDialogState extends State<OverlayDialog> with RippleEffectMixin {
             ...List.generate(
               2,
               (index) => OverlayPortal(
-                controller: [
-                  _overlayPortalController,
-                  _overlayPortalController2
-                ][index],
+                controller: [_overlayPortalController, _overlayPortalController2][index],
                 overlayChildBuilder: (context) {
                   // overlay dialog
                   return overlayWidget(context);
@@ -130,17 +124,11 @@ class _OverlayDialogState extends State<OverlayDialog> with RippleEffectMixin {
                         ImagesPaths.layers
                       ][index],
                       height: 20,
-                      color: index == 1
-                          ? context.colorScheme.primary
-                          : context.colorScheme.secondary,
+                      color:
+                          index == 1 ? context.colorScheme.primary : context.colorScheme.secondary,
                     ),
                     Text(
-                      [
-                        'Cosy areas',
-                        'Price',
-                        'Infrastructure',
-                        'Without any layer'
-                      ][index],
+                      dialogOptions[index],
                       style: context.textTheme.bodySmall?.copyWith(
                         color: index == 1
                             ? context.colorScheme.primary
@@ -150,7 +138,7 @@ class _OverlayDialogState extends State<OverlayDialog> with RippleEffectMixin {
                     ),
                   ].rowInPadding(10),
                 ).onTapWidget(
-                  tooltip: '',
+                  tooltip: dialogOptions[index],
                   onTap: () {
                     setState(() {
                       widget.animationController.reverse();
