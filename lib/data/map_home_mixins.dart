@@ -23,13 +23,9 @@ mixin MapHomeMixins<T extends StatefulWidget> on State<T> implements TickerProvi
         AnimationController(vsync: this, duration: 700.ms, reverseDuration: 500.ms);
     _animationController.addStatusListener((listener) {
       if (listener == AnimationStatus.dismissed) {
-        // _isExpanded = false;
-        // setState(() {});
-        _setExpanded();
+        _setExpandedFalse();
       } else {
-        // _isExpanded = true;
-        // setState(() {});
-        _setExpanded();
+        _setExpandedTrue();
       }
     });
     super.initState();
@@ -45,9 +41,15 @@ mixin MapHomeMixins<T extends StatefulWidget> on State<T> implements TickerProvi
     _darkMapStyle = await rootBundle.loadString(ImagesPaths.darkModeMap);
   }
 
-  void _setExpanded() {
+  void _setExpandedFalse() {
     setState(() {
-      _isExpanded = !_isExpanded;
+      _isExpanded = false;
+    });
+  }
+
+  void _setExpandedTrue() {
+    setState(() {
+      _isExpanded = true;
     });
   }
 
