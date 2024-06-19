@@ -85,7 +85,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> with RippleEffe
               decoration: BoxDecoration(
                 color: pageIndex == index && !onHideBorder
                     ? context.colorScheme.primary
-                    : context.colorScheme.onSurface,
+                    : pageIndex == 0
+                        ? Colors.black26
+                        : context.colorScheme.onSurface,
                 shape: BoxShape.circle,
                 border: onHideBorder && pageIndex == index
                     ? Border.all(color: context.colorScheme.surface, width: 1)
