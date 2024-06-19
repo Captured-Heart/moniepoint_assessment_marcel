@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:moniepoint_assessment_marcel/app.dart';
+import 'package:moniepoint_assessment_marcel/data/ripple_effect_mixins.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class OverlayDialog extends StatefulWidget {
