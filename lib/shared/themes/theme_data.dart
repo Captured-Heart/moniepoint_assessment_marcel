@@ -7,6 +7,7 @@ class AppThemeData {
     scaffoldBackgroundColor: AppColors.white,
     cardColor: AppColors.white,
     fontFamily: AppFonts.euclidFont,
+    primaryColor: AppColors.primary,
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
       primary: AppColors.primary,
