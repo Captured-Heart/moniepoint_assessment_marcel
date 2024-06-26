@@ -45,3 +45,4 @@ app.*.map.json
 .fvm/flutter_sdk
 .vscode/launch.json
 .vscode/settings.json
+test/data/home_view_mixins_test.dart
