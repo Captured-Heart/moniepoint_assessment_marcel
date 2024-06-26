@@ -115,10 +115,7 @@ extension AlignmentExtension on Widget {
     }
   }
 
-  Widget onTapWidget(
-      {VoidCallback? onTap,
-      VoidCallback? onLongPress,
-      required String tooltip}) {
+  Widget onTapWidget({VoidCallback? onTap, VoidCallback? onLongPress, required String tooltip}) {
     return Tooltip(
       message: tooltip,
       child: GestureDetector(
